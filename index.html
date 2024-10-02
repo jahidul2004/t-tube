@@ -16,6 +16,14 @@
             crossorigin="anonymous"
         ></script>
         <!-- font awesome linking end -->
+
+        <!-- Styles start -->
+        <style>
+            .text-semiblack {
+                color: rgba(0, 0, 0, 0.623);
+            }
+        </style>
+        <!-- Styles end -->
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>T-Tube</title>
@@ -63,7 +71,29 @@
                 </div>
                 <!-- Sort by section end -->
             </header>
+
+            <!-- Categories section start -->
+            <div
+                id="categories-container"
+                class="w-[90%] md:container lg:container m-auto justify-center py-5 flex gap-3 md:gap-4 lg:gap-5"
+            ></div>
+            <!-- Categories section end -->
         </section>
         <!-- Header end -->
+
+        <!-- Main section start -->
+        <main>
+            <!-- Videos container start -->
+            <section
+                id="video-container"
+                class="w-[90%] md:container lg:container m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7"
+            ></section>
+            <!-- Videos container end -->
+        </main>
+        <!-- Main section end -->
+
+        <!-- Js linking -->
+        <script src="js/script.js"></script>
+        <!-- Js linking end -->
     </body>
 </html>
