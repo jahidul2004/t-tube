@@ -20,5 +20,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>T-Tube</title>
     </head>
-    <body></body>
+    <body>
+        <!-- Header start -->
+        <section>
+            <header
+                class="w-[90%] md:container lg:container m-auto flex flex-col md:flex-row lg:flex-row gap-5 items-center justify-between py-5 my-2 border-b-2"
+            >
+                <!-- logo section start -->
+                <div class="order-1">
+                    <h1 class="text-3xl font-extrabold">
+                        <i class="text-error fa-solid fa-circle-play"></i>
+                        <span class="text-error">T-</span>Tube
+                    </h1>
+                </div>
+                <!-- logo section end -->
+
+                <!-- Input section start -->
+                <div class="order-3 md:order-2 lg:order-2">
+                    <label class="input input-bordered flex items-center gap-2">
+                        <input type="text" class="grow" placeholder="Search" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                            class="h-4 w-4 opacity-70"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </label>
+                </div>
+                <!-- Input section end -->
+
+                <!-- Sort by section start -->
+                <div class="order-2 md:order-3 lg:order-3">
+                    <button class="btn btn-error text-white">
+                        Sort By View
+                    </button>
+                </div>
+                <!-- Sort by section end -->
+            </header>
+        </section>
+        <!-- Header end -->
+    </body>
 </html>
