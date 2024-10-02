@@ -40,11 +40,19 @@ const displayVideos = (videos) => {
         let title = video.title;
         let profileName = video.authors[0].profile_name;
         let views = video.others.views;
+        let postDate = video.others.posted_date;
+        console.log(postDate);
         let verified = video.authors[0].verified;
 
         let tik = "";
         if (verified === true) {
             tik = `<i class="text-blue-700 fa-solid fa-circle-check"></i>`;
+        }
+        let length = "";
+        if (postDate !== "") {
+            length = gerTimeString(parseInt(postDate));
+        } else {
+            length = "0 seconds ago";
         }
 
         let videoElement = document.createElement("div");
@@ -52,8 +60,9 @@ const displayVideos = (videos) => {
             <div class="flex h-[300px] flex-col">
                 <div>
                     <!-- Img container -->
-                    <div>
+                    <div class="relative">
                         <img class="rounded-lg w-full h-[200px]" src="${thumbnail}" alt="" />
+                        <div class="absolute bottom-1 right-1 text-xs text-white bg-black px-2 py-1 rounded">${length}</div>
                     </div>
                     <!-- Img Container end -->
 
@@ -89,3 +98,12 @@ const displayVideos = (videos) => {
 };
 
 loadVideos();
+
+const gerTimeString = (time) => {
+    let remainHour = parseInt(time / 3600);
+    let remainSecond = parseInt(time % 3600);
+    let remainMinute = parseInt(remainSecond / 60);
+    remainSecond = parseInt(remainSecond % 60);
+
+    return `${remainHour} Hours ${remainMinute} Minutes ${remainSecond} Seconds Ago`;
+};
