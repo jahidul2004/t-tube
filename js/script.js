@@ -37,6 +37,16 @@ const loadVideos = async () => {
 
 const displayVideos = (videos) => {
     document.getElementById("video-container").innerHTML = "";
+
+    if (videos.length === 0) {
+        document.getElementById("video-container").innerHTML = `
+        <div class="col-span-4 flex flex-col m-auto justify-center items-center">
+            <img src="icon/icon.png">
+            <h1 class="text-2xl font-bold text-center">Oops!! Sorry, There is no content here</h1>
+        </div>
+        `;
+    }
+
     for (video of videos) {
         let thumbnail = video.thumbnail;
         let profilePic = video.authors[0].profile_picture;
@@ -87,7 +97,7 @@ const displayVideos = (videos) => {
 
                                 <div>
                                     <p class="text-semiblack font-semibold">${profileName} ${tik}</p>
-                                    <p class="text-semiblack font-semibold"><span>${views}</span>K Views</p>
+                                    <p class="text-semiblack font-semibold"><span>${views}</span> Views</p>
                                 </div>
                             </div>
                     </div>
