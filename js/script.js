@@ -14,7 +14,7 @@ const displayCatagories = (categories) => {
         const buttonContainer = document.createElement("div");
         let categoriesName = category.category;
         buttonContainer.innerHTML = `
-        <button onclick = "loadVideoByID(${category.category_id})" class="btn btn-error text-white">${categoriesName}</button>
+        <button id="btn-${category.category_id}" onclick = "loadVideoByID(${category.category_id})" class="btn btn-ct">${categoriesName}</button>
         `;
         document
             .getElementById("categories-container")
@@ -40,7 +40,7 @@ const displayVideos = (videos) => {
 
     if (videos.length === 0) {
         document.getElementById("video-container").innerHTML = `
-        <div class="col-span-4 flex flex-col m-auto justify-center items-center">
+        <div class="col-span-4 min-h-[50vh] flex flex-col m-auto justify-center items-center">
             <img src="icon/icon.png">
             <h1 class="text-2xl font-bold text-center">Oops!! Sorry, There is no content here</h1>
         </div>
@@ -126,4 +126,14 @@ const loadVideoByID = async (id) => {
     let res = await fetch(api);
     let data = await res.json();
     displayVideos(data.category);
+    removeActiveClass();
+    let btn = `btn-${id}`;
+    document.getElementById(btn).classList.add("btn-error", "text-white");
+};
+
+const removeActiveClass = () => {
+    let btns = document.getElementsByClassName("btn-ct");
+    for (btn of btns) {
+        btn.classList.remove("btn-error");
+    }
 };
