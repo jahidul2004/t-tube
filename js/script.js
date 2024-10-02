@@ -11,12 +11,14 @@ const loadCatagories = async () => {
 
 const displayCatagories = (categories) => {
     for (category of categories) {
-        const button = document.createElement("button");
-        button.classList.add("btn", "btn-error", "text-white");
+        const buttonContainer = document.createElement("div");
         let categoriesName = category.category;
-        button.innerText = categoriesName;
-
-        document.getElementById("categories-container").appendChild(button);
+        buttonContainer.innerHTML = `
+        <button onclick = "loadVideoByID(${category.category_id})" class="btn btn-error text-white">${categoriesName}</button>
+        `;
+        document
+            .getElementById("categories-container")
+            .appendChild(buttonContainer);
     }
 };
 
@@ -34,6 +36,7 @@ const loadVideos = async () => {
 };
 
 const displayVideos = (videos) => {
+    document.getElementById("video-container").innerHTML = "";
     for (video of videos) {
         let thumbnail = video.thumbnail;
         let profilePic = video.authors[0].profile_picture;
@@ -106,4 +109,11 @@ const gerTimeString = (time) => {
     remainSecond = parseInt(remainSecond % 60);
 
     return `${remainHour} Hours ${remainMinute} Minutes ${remainSecond} Seconds Ago`;
+};
+
+const loadVideoByID = async (id) => {
+    let api = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+    let res = await fetch(api);
+    let data = await res.json();
+    displayVideos(data.category);
 };
