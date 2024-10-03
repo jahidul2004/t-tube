@@ -29,7 +29,6 @@ const loadVideos = async () => {
         "https://openapi.programming-hero.com/api/phero-tube/videos"
     );
     let data = await res.json();
-    console.log(data);
     let videos = data.videos;
 
     displayVideos(videos);
@@ -50,12 +49,15 @@ const displayVideos = (videos) => {
     for (video of videos) {
         let thumbnail = video.thumbnail;
         let profilePic = video.authors[0].profile_picture;
+
         let title = video.title;
         let profileName = video.authors[0].profile_name;
+
         let views = video.others.views;
         let postDate = video.others.posted_date;
-        console.log(postDate);
+
         let verified = video.authors[0].verified;
+        let videoID = video.video_id;
 
         let tik = "";
         if (verified === true) {
@@ -74,7 +76,7 @@ const displayVideos = (videos) => {
                 <div>
                     <!-- Img container -->
                     <div class="relative">
-                        <img class="rounded-lg w-full h-[200px]" src="${thumbnail}" alt="" />
+                        <img onclick="loadDetails('${videoID}')" class="cursor-pointer rounded-lg w-full h-[200px]" src="${thumbnail}" alt="" />
                         <div class="absolute bottom-1 right-1 text-xs text-white bg-black px-2 py-1 rounded">${length}</div>
                     </div>
                     <!-- Img Container end -->
@@ -118,7 +120,7 @@ const gerTimeString = (time) => {
     let remainMinute = parseInt(remainSecond / 60);
     remainSecond = parseInt(remainSecond % 60);
 
-    return `${remainHour} Hours ${remainMinute} Minutes ${remainSecond} Seconds Ago`;
+    return `${remainHour} Hours ${remainMinute} Minutes Ago`;
 };
 
 const loadVideoByID = async (id) => {
@@ -136,4 +138,65 @@ const removeActiveClass = () => {
     for (btn of btns) {
         btn.classList.remove("btn-error");
     }
+};
+
+const loadDetails = async (id) => {
+    let res = await fetch(
+        `https://openapi.programming-hero.com/api/phero-tube/video/${id}`
+    );
+    let video = await res.json();
+    displayDetails(video);
+};
+
+const displayDetails = (video) => {
+    console.log(video);
+    let thumb = video.video.thumbnail;
+
+    let profilePic = video.video.authors[0].profile_picture;
+    let title = video.video.title;
+    let profileName = video.video.authors[0].profile_name;
+    let views = video.video.others.views;
+    let postDate = video.video.others.posted_date;
+    let description = video.video.description;
+
+    let modal = document.getElementById("details-container");
+    modal.innerHTML = `
+    
+        <div>
+            <img class="w-full rounded-lg" src="${thumb}" alt="" />
+        </div>
+        <div class="flex items-center gap-3 my-2">
+            <div class="w-max">
+                <img
+                    class="w-[50px] h-[50px] rounded-full"
+                    src="${profilePic}"
+                    alt=""
+                />
+            </div>
+            <div class="w-max">
+                <h1 class="text-xl font-bold">${title}</h1>
+            </div>
+        </div>
+        <div
+            class="my-1 flex gap-1 justify-between items-center"
+        >
+            <div>
+                <p class="text-lg text-semiblack font-semibold">
+                    ${profileName}
+                </p>
+                <p class="text-semiblack font-semibold">${views} Views</p>
+            </div>
+            <div>
+                <p class="text-semiblack font-semibold">
+                    ${gerTimeString(parseInt(postDate))}
+                </p>
+            </div>
+        </div>
+        <div>
+            <p>
+                ${description}
+            </p>
+        </div>
+    `;
+    my_modal_1.showModal();
 };
