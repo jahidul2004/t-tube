@@ -24,9 +24,9 @@ const displayCatagories = (categories) => {
 
 loadCatagories();
 
-const loadVideos = async () => {
+const loadVideos = async (searchText = "") => {
     let res = await fetch(
-        "https://openapi.programming-hero.com/api/phero-tube/videos"
+        `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`
     );
     let data = await res.json();
     let videos = data.videos;
@@ -137,6 +137,7 @@ const removeActiveClass = () => {
     let btns = document.getElementsByClassName("btn-ct");
     for (btn of btns) {
         btn.classList.remove("btn-error");
+        btn.classList.add("text-black");
     }
 };
 
@@ -200,3 +201,8 @@ const displayDetails = (video) => {
     `;
     my_modal_1.showModal();
 };
+
+document.getElementById("search").addEventListener("keyup", function (press) {
+    console.log(press.target.value);
+    loadVideos(press.target.value);
+});
