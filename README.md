@@ -21,7 +21,7 @@ Visit the live website: [T-Tube](https://jahidul2004.github.io/t-tube)
 
 ## Technologies Used
 
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: HTML, CSS(Tailwind), JavaScript
 - **Hosting**: GitHub Pages
 
 ---
@@ -35,3 +35,4 @@ Visit the live website: [T-Tube](https://jahidul2004.github.io/t-tube)
 
 ---
 
+Note:This project is mainly focused for begainers who want to explore API.
